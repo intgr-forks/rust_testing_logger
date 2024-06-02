@@ -117,7 +117,7 @@ pub fn setup() {
 ///
 /// the `asserter` closure can check the number, body, target and level
 /// of captured log events. As a side effect, the records are cleared.
-pub fn validate<F>(asserter: F)  where F: Fn(&Vec<CapturedLog>) {
+pub fn validate<F>(asserter: F)  where F: FnOnce(&Vec<CapturedLog>) {
     LOG_RECORDS.with( |records| {
         asserter(&records.borrow());
         records.borrow_mut().truncate(0);
